@@ -4,7 +4,13 @@
 pool:
   vmImage: 'windows-latest'
 
+
 steps:
+- task: UseDotNet@2
+  displayName: 'Use .NET Core SDK 2.1.505 for SonarCloud'
+  inputs:
+    version: '2.1.505'
+
 - task: DotNetCoreCLI@2
   inputs:
     command: 'restore'
