@@ -6,10 +6,14 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace SonarCloud.Controllers
 {
+
     [Route("api/[controller]")]
     [ApiController]
     public class ValuesController : ControllerBase
     {
+        // Insecure field
+        const string Password = "p4ssw0rd";
+
         // GET api/values
         [HttpGet]
         public ActionResult<IEnumerable<string>> Get()
