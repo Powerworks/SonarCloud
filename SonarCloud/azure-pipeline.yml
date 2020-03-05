@@ -17,18 +17,7 @@ steps:
     projects: '**/*.csproj'
     feedsToUse: 'select'
 
-- task: SonarCloudPrepare@1
-  displayName: 'Prepare SonarCloud analysis'
-  inputs:
-    SonarCloud: 'sonarcloud'
-    organization: 'instructor1'
-    scannerMode: 'MSBuild'
-    projectKey: 'instructor1-key'
-    projectName: 'instructor1-key'
-    projectVersion: '$(Build.BuildNumber)'
-    extraProperties: |
-     sonar.cs.opencover.reportsPaths=$(Build.SourcesDirectory)/TestResults/Coverage/coverage.opencover.xml
-     sonar.exclusions=**/wwwroot/lib/**/*
+# Add SonarCloud Prepare
 
 - task: DotNetCoreCLI@2
   inputs:
@@ -54,11 +43,9 @@ steps:
     reportgenerator -reports:$(Build.SourcesDirectory)/**/coverage.cobertura.xml -targetdir:$(Build.SourcesDirectory)/CodeCoverage -reporttypes:HtmlInline_AzurePipelines
   displayName: 'Create code coverage report'
 
-- task: SonarCloudAnalyze@1
-  displayName: 'Run SonarCloud code analysis'
+# SonarCloudAnalyze
+# SonarCloudPublish
 
-- task: SonarCloudPublish@1
-  displayName: 'Publish SonarCloud quality gate results'
 
 - task: PublishCodeCoverageResults@1
   displayName: 'Publish code coverage report'
